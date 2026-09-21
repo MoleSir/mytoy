@@ -1,0 +1,10 @@
+# clangd 配置（VS Code 的 clangd 插件 / 命令行 clangd 都读这个文件）。
+#
+# compile_commands.json 由 CMake 生成，但它落在 build/ 目录下；clangd 默认
+# 只从被编辑文件所在目录往上层逐级找，找不到 build/ 里的那份，于是所有
+# #include 都会报红。下面这行直接指定数据库位置。
+#
+# 生成数据库的命令（每次重新配置 CMake 后跑一次即可）：
+#   cmake -S . -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+CompileFlags:
+  CompilationDatabase: build
