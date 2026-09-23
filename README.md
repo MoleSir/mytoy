@@ -1,5 +1,6 @@
 # MLIR Toy
 
+重写 MLIR 提供的 Toy 语言，学习 MLIR。
 
 ## 构建
 
@@ -8,6 +9,6 @@ cmake -S . -B build \
   -DMLIR_DIR=/home/molesir/development/llvm-project/build/lib/cmake/mlir \
   -DCMAKE_BUILD_TYPE=Debug \
   -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
-cmake --build build                 # 全部七章
-cmake --build build --target toyc-ch5   # 只编某一章
+cmake --build build # 编译全部
+cmake --build build --target toyc-chx # 编译 chx
 ```
