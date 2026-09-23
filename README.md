@@ -2,6 +2,14 @@
 
 重写 MLIR 提供的 Toy 语言，学习 MLIR。
 
+- [x] ch1
+- [x] ch2
+- [ ] ch3
+- [ ] ch4
+- [ ] ch5
+- [ ] ch6
+- [ ] ch7
+
 ## 构建
 
 ```bash
