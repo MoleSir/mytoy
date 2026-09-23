@@ -36,3 +36,17 @@
 4. 以上都是为了实现 Toy 方言的 C++ 类。到这里我们就导出了一套可以嵌入 MLIR 中的 C++ 类，来表示 Toy 方言。
 
 5. mlir_gen.hh/mlir_gen.cc：实现从 AST 数据结构转为 Toy 方言对象。所以到这里就可以搞一个从 toy 文件 -> AST -> Toy 方言对象 的路径，得到可以被 MLIR 框架操作的一堆类对象！同时支持导出为文本格式。
+
+## 编译
+
+```bash
+cmake --build build --target toyc-ch2
+```
+
+## 验证
+
+```bash
+/home/molesir/development/llvm-project/build/bin/llvm-lit -v build/test/Ch2
+./build/bin/toyc-ch2 test/Ch2/codegen.toy -emit=mlir
+./build/bin/toyc-ch2 test/Ch2/invalid.mlir -emit=mlir
+```
