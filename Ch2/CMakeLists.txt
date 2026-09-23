@@ -1,27 +1,30 @@
-# For a better template to copy, see examples/standalone
-add_subdirectory(include)
+set(LLVM_TARGET_DEFINITIONS src/ops.td)
+mlir_tablegen(ops.h.inc -gen-op-decls)
+mlir_tablegen(ops.cpp.inc -gen-op-defs)
+mlir_tablegen(dialect.h.inc -gen-dialect-decls)
+mlir_tablegen(dialect.cpp.inc -gen-dialect-defs)
+add_public_tablegen_target(ToyCh2OpsIncGen)
 
-set(LLVM_LINK_COMPONENTS
-  Support
-  )
+set(LLVM_LINK_COMPONENTS Support)
 
-add_toy_chapter(toyc-ch2
-  toyc.cpp
-  parser/AST.cpp
-  mlir/MLIRGen.cpp
-  mlir/Dialect.cpp
+add_toy_chapter(
+    toyc-ch2 
+    main.cc 
+    src/ast.cc
+    src/dialect.cc
+    src/mlir_gen.cc
+    DEPENDS ToyCh2OpsIncGen
+)
 
-  DEPENDS
-  ToyCh2OpsIncGen
+include_directories(src)
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
-  )
-include_directories(include/)
-include_directories(${CMAKE_CURRENT_BINARY_DIR}/include/)
-target_link_libraries(toyc-ch2
-  PRIVATE
+target_link_libraries(toyc-ch2 PRIVATE
     MLIRAnalysis
     MLIRFunctionInterfaces
     MLIRIR
     MLIRParser
     MLIRSideEffectInterfaces
-    MLIRTransforms)
+    MLIRSupport
+    MLIRTransforms
+)
